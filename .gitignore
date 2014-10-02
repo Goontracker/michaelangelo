@@ -1,0 +1,8 @@
+.classpath
+.idea/
+.pom.xml.swp
+.project
+.settings/
+michaelangelo.iml
+pom.xml.versionsBackup
+target/
