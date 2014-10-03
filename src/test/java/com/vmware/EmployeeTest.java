@@ -5,6 +5,7 @@ import static org.testng.Assert.*;
 import java.util.regex.Pattern;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class EmployeeTest {
@@ -39,14 +40,22 @@ public class EmployeeTest {
 		assertEquals(employee.getSocialSecurityNumber(), "123-45-6710");
 	}
 	
-	@Test
-	public void fixDE30201_SocialSecurityMustBeACertainFormat() {
-		String badSSN = "sfsFSf";
+	@DataProvider(name="badSSNs")
+	public Object[][] badSSNProvider() {
+		return new Object[][] {
+				{"ddds", "ddds is not a valid SSN"},
+				{"1", "1 is not a valid SSN"},
+				{"", "SSN cannot be blank"}
+		};
+	}
+	
+	@Test(dataProvider="badSSNs")
+	public void fixDE30201_SocialSecurityMustBeACertainFormat(String badSSN, String expectedMessage) {
 		try {
 			employee.setSocialSecurityNumber(badSSN);
 			fail("This line should not have reached");			
 		} catch (IllegalArgumentException iae) {
-			assertEquals(iae.getMessage(), "sfsFSf is not a valid SSN");
+			assertEquals(iae.getMessage(), expectedMessage);
 		}
 	}
 }
