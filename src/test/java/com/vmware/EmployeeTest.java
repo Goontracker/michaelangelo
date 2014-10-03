@@ -13,4 +13,21 @@ public class EmployeeTest {
 		employee.setName(name);
 		assertEquals(employee.getName(), name);
 	}
+	
+	//Eclipse : F2 brings up the helper
+	//CTRL+F11 Run
+	//CTRL+E Recent Files
+	@Test
+	public void addASocialSecurityNumber() {
+		Employee employee = new Employee();
+		employee.setSocialSecurityNumber("123-45-6789");
+		assertEquals(employee.getSocialSecurityNumber(), "123-45-6789");
+	}
+	
+	@Test
+	public void addAnotherSocialSecurityNumber() {
+		Employee employee = new Employee();
+		employee.setSocialSecurityNumber("123-45-6710");
+		assertEquals(employee.getSocialSecurityNumber(), "123-45-6710");
+	}
 }
